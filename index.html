@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let humanScore = 0;
+    let computerScore = 0;
+    const computerOptions = ['rock', 'paper', 'scissors']
+
+    function getComputerChoice(){
+        let choiceNumber = Math.floor(Math.random() * 3);
+        let computerChoice = computerOptions[choiceNumber];
+        return computerChoice;
+    }
+
+    function getHumanChoice() {
+        let humanChoice = prompt("Enter choice: ");
+        return humanChoice;
+    }
+
+    function playRound(choiceHuman, choiceComputer){
+        let humanChoice = choiceHuman.toLowerCase();
+        let computerChoice = choiceComputer.toLowerCase();
+        console.log("Computer: " + computerChoice + ", " + "Human: " + humanChoice);
+
+        if (humanChoice === computerChoice){
+            console.log("Tie!")
+        } else if (humanChoice === "rock"){
+            if(computerChoice === "scissors"){
+                humanScore++;
+                console.log(humanChoice + " beats " + computerChoice);
+            }else{
+                computerScore++;
+                console.log(computerChoice + " beats " + humanChoice);
+            }
+        } else if (humanChoice === "paper") {
+            if (computerChoice === "rock"){
+                humanScore++;
+                console.log(humanChoice + " beats " + computerChoice);
+            } else {
+                computerScore++;
+                console.log(computerChoice + " beats " + humanChoice);
+            }
+        } else if (humanChoice === "scissors") {
+            if (computerChoice === "paper"){
+                humanScore++;
+                console.log(humanChoice + " beats " + computerChoice);
+            } else {
+                computerScore++;
+                console.log(computerChoice + " beats " + humanChoice);
+            }
+        }
+
+        console.log("Computer: " + computerScore + ", " + "Human: " + humanScore)
+    }
+
+    function playGame() {
+        let round = 0;
+        while (round != 5) {
+            const humanSelection = getHumanChoice();
+            const computerSelection = getComputerChoice();
+
+            playRound(humanSelection, computerSelection);
+
+            round++;
+            if(round === 5){
+                if(computerScore > humanScore){
+                    console.log("Sorry, computer wins!");
+                } else if (computerScore < humanScore) {
+                    console.log("Congratulations, you win!");
+                } else {
+                    console.log("Its a tie!");
+                }
+            }
+        }
+    }
+
+    playGame()
+</script>
+</html>
